@@ -1,0 +1,8 @@
+{
+  "name": "SI-PEDIPONTREN Gowa",
+  "description": "Sistem Informasi Profil Lembaga Pendidikan Diniyah dan Pondok Pesantren Kantor Kementerian Agama Kabupaten Gowa. Mengelola data Pondok Pesantren, TPQ, MDT, RTQ, dan PAUDQU dengan dashboard statistik dinamis.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
