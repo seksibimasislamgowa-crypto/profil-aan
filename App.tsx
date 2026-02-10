@@ -394,18 +394,52 @@ const InstitutionFormModal: React.FC<{
                 ))
               ) : (
                 // NON-PONPES Education Fields
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  <Input label="Santri (L) SD/MI" type="number" value={(formData as any).studentEducationLevels.maleSd} onChange={v => updateNested('studentEducationLevels.maleSd', Number(v))} />
-                  <Input label="Santri (P) SD/MI" type="number" value={(formData as any).studentEducationLevels.femaleSd} onChange={v => updateNested('studentEducationLevels.femaleSd', Number(v))} />
-                  <Input label="Santri (L) SMP/MTs" type="number" value={(formData as any).studentEducationLevels.maleSmp} onChange={v => updateNested('studentEducationLevels.maleSmp', Number(v))} />
-                  <Input label="Santri (P) SMP/MTs" type="number" value={(formData as any).studentEducationLevels.femaleSmp} onChange={v => updateNested('studentEducationLevels.femaleSmp', Number(v))} />
-                  <Input label="Pendidik" type="number" value={(formData as any).studentEducationLevels.teachers} onChange={v => updateNested('studentEducationLevels.teachers', Number(v))} />
-                  <Input label="Tenaga Kependidikan" type="number" value={(formData as any).studentEducationLevels.staff} onChange={v => updateNested('studentEducationLevels.staff', Number(v))} />
-                  <div className="col-span-full grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-sky-50 rounded-3xl">
-                     <Input label="BPJS Guru (Kes)" type="number" value={(formData as any).bpjs.teacherHealth} onChange={v => updateNested('bpjs.teacherHealth', Number(v))} />
-                     <Input label="BPJS Guru (Ket)" type="number" value={(formData as any).bpjs.teacherWork} onChange={v => updateNested('bpjs.teacherWork', Number(v))} />
-                     <Input label="BPJS Staf (Kes)" type="number" value={(formData as any).bpjs.staffHealth} onChange={v => updateNested('bpjs.staffHealth', Number(v))} />
-                     <Input label="BPJS Staf (Ket)" type="number" value={(formData as any).bpjs.staffWork} onChange={v => updateNested('bpjs.staffWork', Number(v))} />
+                <div className="space-y-8">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <Input label="Santri (L) SD/MI" type="number" value={(formData as any).studentEducationLevels.maleSd} onChange={v => updateNested('studentEducationLevels.maleSd', Number(v))} />
+                    <Input label="Santri (P) SD/MI" type="number" value={(formData as any).studentEducationLevels.femaleSd} onChange={v => updateNested('studentEducationLevels.femaleSd', Number(v))} />
+                    <Input label="Santri (L) SMP/MTs" type="number" value={(formData as any).studentEducationLevels.maleSmp} onChange={v => updateNested('studentEducationLevels.maleSmp', Number(v))} />
+                    <Input label="Santri (P) SMP/MTs" type="number" value={(formData as any).studentEducationLevels.femaleSmp} onChange={v => updateNested('studentEducationLevels.femaleSmp', Number(v))} />
+                    <Input label="Pendidik" type="number" value={(formData as any).studentEducationLevels.teachers} onChange={v => updateNested('studentEducationLevels.teachers', Number(v))} />
+                    <Input label="Tenaga Kependidikan" type="number" value={(formData as any).studentEducationLevels.staff} onChange={v => updateNested('studentEducationLevels.staff', Number(v))} />
+                    <div className="col-span-full grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-sky-50 rounded-3xl">
+                      <Input label="BPJS Guru (Kes)" type="number" value={(formData as any).bpjs.teacherHealth} onChange={v => updateNested('bpjs.teacherHealth', Number(v))} />
+                      <Input label="BPJS Guru (Ket)" type="number" value={(formData as any).bpjs.teacherWork} onChange={v => updateNested('bpjs.teacherWork', Number(v))} />
+                      <Input label="BPJS Staf (Kes)" type="number" value={(formData as any).bpjs.staffHealth} onChange={v => updateNested('bpjs.staffHealth', Number(v))} />
+                      <Input label="BPJS Staf (Ket)" type="number" value={(formData as any).bpjs.staffWork} onChange={v => updateNested('bpjs.staffWork', Number(v))} />
+                    </div>
+                  </div>
+
+                  {/* New Munaqasyah Data for Non-Ponpes */}
+                  <div className="p-6 bg-amber-50 rounded-3xl border border-amber-100 space-y-6">
+                    <h5 className="font-bold text-amber-800 flex items-center gap-2">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      Data Munaqasyah
+                    </h5>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <label className="text-xs font-black uppercase text-amber-700 block mb-3">Jumlah Peserta Munaqasyah</label>
+                        <div className="grid grid-cols-5 gap-2">
+                          {years.map(year => (
+                            <Input key={year} label={year} type="number" 
+                              value={(formData as NonPonpesInstitution).munaqasyahParticipants[year] || 0} 
+                              onChange={v => updateNested(`munaqasyahParticipants.${year}`, Number(v))} 
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs font-black uppercase text-amber-700 block mb-3">Jumlah Lulusan Munaqasyah</label>
+                        <div className="grid grid-cols-5 gap-2">
+                          {years.map(year => (
+                            <Input key={year} label={year} type="number" 
+                              value={(formData as NonPonpesInstitution).munaqasyahGraduates[year] || 0} 
+                              onChange={v => updateNested(`munaqasyahGraduates.${year}`, Number(v))} 
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
